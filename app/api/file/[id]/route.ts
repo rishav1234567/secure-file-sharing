@@ -40,7 +40,7 @@ export async function GET(
     // Generate a fresh nonce for this download session
     const nonce = await generateNonce(id);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin;
 
     return Response.json({
       fileId: id,

@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyToken } from "@/lib/auth";
 import { connectDB } from "@/lib/db";
@@ -38,7 +38,11 @@ export default async function DashboardPage() {
     isExpired: f.expiresAt < new Date(),
   }));
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const headersList = await headers();
+  const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
+  const protocol = headersList.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
+  const fallbackUrl = host ? `${protocol}://${host}` : "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || fallbackUrl;
 
   return (
     <DashboardClient

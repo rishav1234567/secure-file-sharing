@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
         oneTimeOnly,
       });
 
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin;
       const shareLink = `${baseUrl}/file/${fileDoc._id.toString()}`;
 
       return Response.json(
