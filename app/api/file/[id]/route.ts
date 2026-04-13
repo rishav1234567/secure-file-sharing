@@ -40,7 +40,10 @@ export async function GET(
     // Generate a fresh nonce for this download session
     const nonce = await generateNonce(id);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin;
+    const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
+    const protocol = request.headers.get("x-forwarded-proto") || "https";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL 
+      || (host ? `${protocol}://${host}` : process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
     return Response.json({
       fileId: id,
