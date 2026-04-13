@@ -88,7 +88,7 @@ export default function LoginPage() {
           >
             <SecurityIcon sx={{ color: "#fff", fontSize: 32 }} />
           </Box>
-          <Typography variant="h4" fontWeight={800} gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 800 }} gutterBottom>
             Welcome back
           </Typography>
           <Typography color="text.secondary">
@@ -177,8 +177,7 @@ export default function LoginPage() {
                 component={Link}
                 href="/signup"
                 color="primary"
-                fontWeight={600}
-                sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
+                sx={{ fontWeight: 600, textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
               >
                 Create one now
               </Typography>

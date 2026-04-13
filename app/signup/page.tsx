@@ -111,7 +111,7 @@ export default function SignupPage() {
           >
             <PersonAddIcon sx={{ color: "#fff", fontSize: 32 }} />
           </Box>
-          <Typography variant="h4" fontWeight={800} gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 800 }} gutterBottom>
             Create account
           </Typography>
           <Typography color="text.secondary">
@@ -252,8 +252,7 @@ export default function SignupPage() {
                 component={Link}
                 href="/login"
                 color="primary"
-                fontWeight={600}
-                sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
+                sx={{ fontWeight: 600, textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
               >
                 Sign in
               </Typography>

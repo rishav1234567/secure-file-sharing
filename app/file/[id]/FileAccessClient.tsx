@@ -146,13 +146,13 @@ export default function FileAccessClient({ fileId }: FileAccessClientProps) {
           {loading ? (
             <Box sx={{ textAlign: "center" }}>
               <CircularProgress size={56} />
-              <Typography mt={2} color="text.secondary">Loading file information...</Typography>
+              <Typography sx={{ mt: 2 }} color="text.secondary">Loading file information...</Typography>
             </Box>
           ) : error ? (
             <Card>
               <CardContent sx={{ p: 5, textAlign: "center" }}>
                 <ErrorOutlineIcon sx={{ fontSize: 72, color: "error.main", mb: 2 }} />
-                <Typography variant="h5" fontWeight={700} gutterBottom>
+                <Typography variant="h5" sx={{ fontWeight: 700 }} gutterBottom>
                   Access Denied
                 </Typography>
                 <Alert severity="error" sx={{ borderRadius: 2, mt: 2 }}>
@@ -192,7 +192,7 @@ function FileCard({
       <Card>
         <CardContent sx={{ p: 5, textAlign: "center" }}>
           <TimerIcon sx={{ fontSize: 72, color: "warning.main", mb: 2 }} />
-          <Typography variant="h5" fontWeight={700} gutterBottom>Link Expired</Typography>
+          <Typography variant="h5" sx={{ fontWeight: 700 }} gutterBottom>Link Expired</Typography>
           <Typography color="text.secondary">
             This file link has expired and is no longer accessible.
           </Typography>
@@ -223,7 +223,7 @@ function FileCard({
             <InsertDriveFileIcon sx={{ fontSize: 40, color: "primary.main" }} />
           </Box>
 
-          <Typography variant="h5" fontWeight={800} gutterBottom sx={{ wordBreak: "break-word" }}>
+          <Typography variant="h5" gutterBottom sx={{ fontWeight: 800, wordBreak: "break-word" }}>
             {fileData.originalName}
           </Typography>
 
@@ -255,9 +255,8 @@ function FileCard({
             </Box>
             <Typography
               variant="body2"
-              fontWeight={700}
-              fontFamily="monospace"
               color={progress < 20 ? "warning.main" : "text.primary"}
+              sx={{ fontWeight: 700, fontFamily: "monospace" }}
             >
               {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
             </Typography>
@@ -279,11 +278,11 @@ function FileCard({
         <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
           <Box>
             <Typography variant="caption" color="text.secondary">Downloads</Typography>
-            <Typography variant="h6" fontWeight={700}>{fileData.downloadCount}</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700 }}>{fileData.downloadCount}</Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <LockIcon sx={{ fontSize: 14, color: "secondary.main" }} />
-            <Typography variant="caption" color="secondary.main" fontWeight={600}>
+            <Typography variant="caption" color="secondary.main" sx={{ fontWeight: 600 }}>
               Secured with nonce validation
             </Typography>
           </Box>

@@ -47,6 +47,7 @@ const theme = createTheme({
           boxShadow: "none",
           "&:hover": { boxShadow: "0 4px 20px rgba(108,99,255,0.35)" },
         },
+        // @ts-ignore
         containedPrimary: {
           background: "linear-gradient(135deg, #6C63FF 0%, #9C94FF 100%)",
           "&:hover": {

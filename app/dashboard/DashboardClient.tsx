@@ -133,10 +133,10 @@ export default function DashboardClient({ files, userEmail, baseUrl }: Dashboard
             }}
           >
             <Box>
-              <Typography variant="h4" fontWeight={800}>
+              <Typography variant="h4" sx={{ fontWeight: 800 }}>
                 My Files
               </Typography>
-              <Typography color="text.secondary" mt={0.5}>
+              <Typography color="text.secondary" sx={{ mt: 0.5 }}>
                 Manage your uploaded files and share links
               </Typography>
             </Box>
@@ -207,10 +207,10 @@ export default function DashboardClient({ files, userEmail, baseUrl }: Dashboard
               }}
             >
               <CloudUploadIcon sx={{ fontSize: 64, color: "primary.main", mb: 2, opacity: 0.5 }} />
-              <Typography variant="h5" fontWeight={700} gutterBottom>
+              <Typography variant="h5" sx={{ fontWeight: 700 }} gutterBottom>
                 No files yet
               </Typography>
-              <Typography color="text.secondary" mb={3}>
+              <Typography color="text.secondary" sx={{ mb: 3 }}>
                 Upload your first file to generate a secure shareable link
               </Typography>
               <Button component={Link} href="/upload" variant="contained" size="large">
@@ -248,7 +248,7 @@ export default function DashboardClient({ files, userEmail, baseUrl }: Dashboard
                         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                           <InsertDriveFileIcon sx={{ color: "primary.main", opacity: 0.7 }} />
                           <Box>
-                            <Typography variant="body2" fontWeight={600} noWrap sx={{ maxWidth: 220 }}>
+                            <Typography variant="body2" noWrap sx={{ fontWeight: 600, maxWidth: 220 }}>
                               {file.originalName}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">

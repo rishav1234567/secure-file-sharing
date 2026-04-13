@@ -144,7 +144,7 @@ export default function UploadClient({ userEmail }: UploadClientProps) {
       >
         <Container maxWidth="sm">
           <Box sx={{ textAlign: "center", mb: 5 }}>
-            <Typography variant="h4" fontWeight={800} gutterBottom>
+            <Typography variant="h4" sx={{ fontWeight: 800 }} gutterBottom>
               Upload a File
             </Typography>
             <Typography color="text.secondary">
@@ -178,7 +178,7 @@ export default function UploadClient({ userEmail }: UploadClientProps) {
                   {selectedFile ? (
                     <Box>
                       <InsertDriveFileIcon sx={{ fontSize: 56, color: "secondary.main", mb: 1 }} />
-                      <Typography variant="h6" fontWeight={700} gutterBottom>
+                      <Typography variant="h6" sx={{ fontWeight: 700 }} gutterBottom>
                         {selectedFile.name}
                       </Typography>
                       <Chip label={formatBytes(selectedFile.size)} size="small" color="secondary" />
@@ -187,7 +187,7 @@ export default function UploadClient({ userEmail }: UploadClientProps) {
                   ) : (
                     <Box>
                       <CloudUploadIcon sx={{ fontSize: 64, color: "primary.main", mb: 2, opacity: 0.6 }} />
-                      <Typography variant="h6" fontWeight={700} gutterBottom>
+                      <Typography variant="h6" sx={{ fontWeight: 700 }} gutterBottom>
                         Drop your file here
                       </Typography>
                       <Typography color="text.secondary" variant="body2">
@@ -222,7 +222,7 @@ export default function UploadClient({ userEmail }: UploadClientProps) {
                 {/* Options */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3 }}>
                   <Box>
-                    <Typography variant="body2" fontWeight={600}>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
                       One-time download
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
@@ -278,10 +278,10 @@ export default function UploadClient({ userEmail }: UploadClientProps) {
             <Card>
               <CardContent sx={{ p: 4, textAlign: "center" }}>
                 <CheckCircleIcon sx={{ fontSize: 72, color: "secondary.main", mb: 2 }} />
-                <Typography variant="h5" fontWeight={800} gutterBottom>
+                <Typography variant="h5" sx={{ fontWeight: 800 }} gutterBottom>
                   File Uploaded Successfully!
                 </Typography>
-                <Typography color="text.secondary" mb={3}>
+                <Typography color="text.secondary" sx={{ mb: 3 }}>
                   Your secure share link is ready. It expires in 24 hours.
                 </Typography>
 
