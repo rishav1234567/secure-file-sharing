@@ -41,8 +41,10 @@ export default async function DashboardPage() {
   const headersList = await headers();
   const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
   const protocol = headersList.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const fallbackUrl = host ? `${protocol}://${host}` : "http://localhost:3000";
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || fallbackUrl;
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL || (!baseUrl || baseUrl.includes("localhost"))) {
+    baseUrl = host ? `${protocol}://${host}` : "http://localhost:3000";
+  }
 
   return (
     <DashboardClient

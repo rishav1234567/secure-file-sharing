@@ -76,8 +76,11 @@ export async function POST(request: NextRequest) {
 
       const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
       const protocol = request.headers.get("x-forwarded-proto") || "https";
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL 
-        || (host ? `${protocol}://${host}` : process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+      let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+      // If deployed on Vercel, ignore NEXT_PUBLIC_BASE_URL if it's accidentally set to localhost
+      if (process.env.VERCEL || (!baseUrl || baseUrl.includes("localhost"))) {
+        baseUrl = host ? `${protocol}://${host}` : process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
+      }
       const shareLink = `${baseUrl}/file/${fileDoc._id.toString()}`;
 
       return Response.json(
