@@ -48,36 +48,51 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "Invalid file name" }, { status: 400 });
     }
 
-    await connectDB();
+    try {
+      await connectDB();
 
-    const uniqueId = uuidv4();
-    const filePath = await saveFile(file, originalName, uniqueId);
+      const uniqueId = uuidv4();
+      
+      // Convert File to Buffer to avoid Next.js File object serialization issues with Vercel Blob
+      let fileData: File | Buffer = file;
+      if (typeof file.arrayBuffer === "function") {
+        fileData = Buffer.from(await file.arrayBuffer());
+      }
 
-    // Save metadata to MongoDB
-    const fileDoc = await FileModel.create({
-      userId,
-      fileName: uniqueId + "-" + originalName.replace(/[^a-zA-Z0-9._-]/g, "_"),
-      originalName,
-      mimeType: file.type || "application/octet-stream",
-      size: file.size,
-      filePath,
-      expiresAt: new Date(Date.now() + FILE_EXPIRY_MS),
-      downloadCount: 0,
-      oneTimeOnly,
-    });
+      const filePath = await saveFile(fileData, originalName, uniqueId);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-    const shareLink = `${baseUrl}/file/${fileDoc._id.toString()}`;
-
-    return Response.json(
-      {
-        message: "File uploaded successfully",
-        fileId: fileDoc._id.toString(),
-        shareLink,
-        expiresAt: fileDoc.expiresAt,
+      // Save metadata to MongoDB
+      const fileDoc = await FileModel.create({
+        userId,
+        fileName: uniqueId + "-" + originalName.replace(/[^a-zA-Z0-9._-]/g, "_"),
+        originalName,
+        mimeType: file.type || "application/octet-stream",
+        size: file.size,
+        filePath,
+        expiresAt: new Date(Date.now() + FILE_EXPIRY_MS),
+        downloadCount: 0,
         oneTimeOnly,
-      },
-      { status: 201 }
-    );
+      });
+
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+      const shareLink = `${baseUrl}/file/${fileDoc._id.toString()}`;
+
+      return Response.json(
+        {
+          message: "File uploaded successfully",
+          fileId: fileDoc._id.toString(),
+          shareLink,
+          expiresAt: fileDoc.expiresAt,
+          oneTimeOnly,
+        },
+        { status: 201 }
+      );
+    } catch (err: any) {
+      console.error("Upload Error:", err);
+      return Response.json(
+        { error: "Internal Server Error: " + (err?.message || String(err)) },
+        { status: 500 }
+      );
+    }
   });
 }
