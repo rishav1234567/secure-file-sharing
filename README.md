@@ -37,3 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 i have added something
+git add .
+git commit -m "message"
+git push origin <branch-name>
